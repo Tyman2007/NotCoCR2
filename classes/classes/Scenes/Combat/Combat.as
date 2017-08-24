@@ -57,7 +57,33 @@ package classes.Scenes.Combat
 			getGame().inCombat = mode;
 		}
 		
+		//
+		// Settings
+		//
+		
+		private static const STR_EFFECT:Number 			= 1.33;
+		private static const MELEE_WEP_EFFECT:Number 	= 0.55;
+		private static const RANGED_EFFECT:Number		= 0.66;
+		
+		private static const DAMAGE_MULT:Number 		= 2.0;
+		private static const DAMAGE_FLUX:Number			= 0.2;		//Percentage of damage fluctuation.
+		
+		//
+		// Formulae
+		//
+		
+		private function get getMeleeDamage():Number 	{ return (player.str * STR_EFFECT) + (player.weaponAttack * MELEE_WEP_EFFECT); }
+		private function get getRangedDamage():Number	{ return (player.spe + player.weaponAttack) * RANGED_EFFECT; }
+		
+		private function get getDamage():Number { 
+			if (isWieldingRangedWeapon()) return getRangedDamage * DAMAGE_MULT;
+			else return getMeleeDamage * DAMAGE_MULT;
+		}
+		
+		//
 		//Victory & Loss
+		//
+		
 		public function endHpVictory():void { 
 			monster.defeated_(true);
 		}
@@ -689,7 +715,44 @@ package classes.Scenes.Combat
 			if (player.findPerk(PerkLib.EnlightenedNinetails) >= 0 || player.findPerk(PerkLib.CorruptedNinetails) >= 0) player.changeFatigue(-(1+rand(3)));
 		}
 
+		private function checkHit(damage:Number):Boolean {
+			if (damage > 0) {
+				damage = doDamage(damage);
+				outputText("You hit " + monster.a + monster.short + "! ");
+				outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>\n")
+				return true;
+			} else {
+				damage = 0;
+				outputText("Your attacks are deflected or blocked by " + monster.a + monster.short + ".\n");
+				return false;
+			}
+		}
+		
+		private function checkVictory():Boolean {
+			if (monster.HP >= 1 && monster.lust < monster.maxLust()) {
+				outputText("\n");
+				monster.doAI();
+				return false;
+			}
+			else {
+				if (monster.HP <= 0) doNext(endHpVictory);
+				else doNext(endLustVictory);
+				return true;
+			}
+		}
+		
+		public function attack():void {
+			var damage:Number = getDamage;
+			
+			damage *= 1 + ((rand(100) / 100) * DAMAGE_FLUX);
+			
+			checkHit(damage);
+			checkAchievementDamage(damage);
+			checkVictory();
+		}
+		
 		//ATTACK
+		/*
 		public function attack():void {
 			if (!player.hasStatusEffect(StatusEffects.FirstAttack)) {
 				clearOutput();
@@ -1089,6 +1152,7 @@ package classes.Scenes.Combat
 				else doNext(endLustVictory);
 			}
 		}
+		*/
 		
 		public function combatMiss():Boolean {
 			return player.spe - monster.spe > 0 && int(Math.random() * (((player.spe - monster.spe) / 4) + 80)) > 80;

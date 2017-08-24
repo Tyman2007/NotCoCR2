@@ -26,7 +26,20 @@ package classes
 		public function get flags():DefaultDict {
 			return game.flags;
 		}
-
+		
+		//
+		// Settings
+		//
+		
+		private static const DEFENSE_EFFECT:Number  = 256;	//DEFENSE / DEFENSE_EFFECT = Damage reduction %.
+		private static const DEFENSE_MAX:Number		= 240;	//DEFENSE_MAX / DEFENSE_EFFECT = Max damage reduction %. Default 240/256 = 93.75%
+		
+		//
+		// Formulae
+		//
+		
+		private function get getDefense():Number { return armorDef + tou;  }
+		
 		//Variables
 		
 		//Short refers to player name and monster name. BEST VARIABLE NAME EVA!
@@ -3639,6 +3652,14 @@ package classes
 			else return rand(temp);
 		}
 		
+		
+		public function damagePercent(displayMode:Boolean = false, applyModifiers:Boolean = false):Number {
+			var def:Number = getDefense;
+			if (def > DEFENSE_MAX) def = DEFENSE_MAX;
+			return (1 - (def / DEFENSE_EFFECT))*100;
+		}
+		
+		/*
 		public function damagePercent(displayMode:Boolean = false, applyModifiers:Boolean = false):Number {
 			var mult:Number = 100;
 			var armorMod:Number = armorDef;
@@ -3682,6 +3703,7 @@ package classes
 			if (mult < 20) mult = 20;
 			return mult;
 		}
+		*/
 		
 		public function lustPercent():Number {
 			var lust:Number = 100;

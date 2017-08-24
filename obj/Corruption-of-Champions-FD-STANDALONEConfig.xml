@@ -41,17 +41,17 @@
     </define>
     <verbose-stacktraces>true</verbose-stacktraces>
     <source-path append="true">
-      <path-element>E:\Downloads\Corruption-of-Champions-Mod-1.0.2_mod_1.4.8\Corruption-of-Champions-Mod-1.0.2_mod_1.4.8\classes</path-element>
-      <path-element>E:\Downloads\Corruption-of-Champions-Mod-1.0.2_mod_1.4.8\Corruption-of-Champions-Mod-1.0.2_mod_1.4.8\lib\bin</path-element>
+      <path-element>E:\Downloads\Corruption-of-Champions-Mod-1.0.2_mod_1.4.8\NotCoCR2\classes</path-element>
+      <path-element>E:\Downloads\Corruption-of-Champions-Mod-1.0.2_mod_1.4.8\NotCoCR2\lib\bin</path-element>
       <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
     <library-path append="true">
-      <path-element>E:\Downloads\Corruption-of-Champions-Mod-1.0.2_mod_1.4.8\Corruption-of-Champions-Mod-1.0.2_mod_1.4.8\lib\bin\MainView.swc</path-element>
-      <path-element>E:\Downloads\Corruption-of-Champions-Mod-1.0.2_mod_1.4.8\Corruption-of-Champions-Mod-1.0.2_mod_1.4.8\lib\bin\ScrollPane.swc</path-element>
+      <path-element>E:\Downloads\Corruption-of-Champions-Mod-1.0.2_mod_1.4.8\NotCoCR2\lib\bin\MainView.swc</path-element>
+      <path-element>E:\Downloads\Corruption-of-Champions-Mod-1.0.2_mod_1.4.8\NotCoCR2\lib\bin\ScrollPane.swc</path-element>
     </library-path>
   </compiler>
   <file-specs>
-    <path-element>E:\Downloads\Corruption-of-Champions-Mod-1.0.2_mod_1.4.8\Corruption-of-Champions-Mod-1.0.2_mod_1.4.8\classes\classes\CoC.as</path-element>
+    <path-element>E:\Downloads\Corruption-of-Champions-Mod-1.0.2_mod_1.4.8\NotCoCR2\classes\classes\CoC.as</path-element>
   </file-specs>
   <default-background-color>#000000</default-background-color>
   <default-frame-rate>24</default-frame-rate>

@@ -33,6 +33,23 @@ package classes
 		protected final function outputText(text:String):void{
 			game.outputText(text);
 		}
+		
+		
+		//
+		// Settings
+		//
+		
+		private static const DAMAGE_GROWTH:Number 	= 0.4;	//Damage per level, per level. (Not a typo)
+		private static const DAMAGE_BASE:Number 	= 9;	//Damage at level 0.
+		
+		//
+		// Formulae
+		//
+		
+		public function eBaseDamage():Number { return (level * level * DAMAGE_GROWTH) + DAMAGE_BASE; }
+		
+		//-----------------------------------------------------
+		
 		protected final function combatRoundOver():void{
 			game.combat.combatRoundOver();
 		}
@@ -199,13 +216,6 @@ package classes
 		 */
 		public function HPRatio():Number {
 			return HP / maxHP();
-		}
-
-		/**
-		 * @return damage not reduced by player stats
-		 */
-		public function eBaseDamage():Number {
-			return str + weaponAttack;
 		}
 
 		/**
